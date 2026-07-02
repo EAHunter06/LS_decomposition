@@ -12,8 +12,8 @@ function [U, D, V, DirU_out, DirV_out] = LS_step(X, U_cur, D_cur, V_cur, L_cur, 
 
     % --- 1. Lookahead point (Nesterov extrapolation, projected to tangent) ---
     if use_momentum
-        MomU = DirU_prev - U_cur * (U_cur' * DirU_prev);
-        MomV = DirV_prev - V_cur * (V_cur' * DirV_prev);
+        MomU = DirU_prev - U_cur * (DirU_prev' * U_cur);
+        MomV = DirV_prev - V_cur * (DirV_prev' * V_cur);
         U_look = U_cur + beta * MomU;
         V_look = V_cur + beta * MomV;
     else
